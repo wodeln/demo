@@ -1,0 +1,54 @@
+spring:
+  profiles:
+    active: dev
+  session:
+    store-type: none
+  freemarker:
+        allow-request-override: false
+        allow-session-override: false
+        cache: true
+        charset: UTF-8
+        check-template-location: true
+        content-type: text/html
+        enabled: true
+        expose-request-attributes: false
+        expose-session-attributes: false
+        expose-spring-macro-helpers: true
+        prefer-file-system-access: true
+        template-loader-path: classpath:/templates/
+        settings:
+          template_update_delay: 0
+          default_encoding: UTF-8
+          classic_compatible: true
+  mvc:
+    view:
+        prefix:
+        suffix: .ftl
+mybatis:
+    mapper-locations: classpath:*Mapper.xml
+    type-aliases-package: com.example.been
+    config-location: classpath:mybatis-config.xml
+---
+spring:
+    profiles: dev
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        platform: mysql
+        url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull
+        username: root
+        password:
+        driverClassName: com.mysql.jdbc.Driver
+server:
+  port: 8080
+---
+spring:
+    profiles: prod
+    datasource:
+        type: com.alibaba.druid.pool.DruidDataSource
+        platform: mysql
+        url: jdbc:mysql://localhost:3306/demo?useUnicode=true&characterEncoding=UTF-8&relaxAutoCommit=true&zeroDateTimeBehavior=convertToNull
+        username: root
+        password:
+        driverClassName: com.mysql.jdbc.Driver
+server:
+  port: 8081
